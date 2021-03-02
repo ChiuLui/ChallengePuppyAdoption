@@ -49,7 +49,7 @@ fun DogDetail(dog: Dog) {
                 painter = painterResource(dog.photo),
                 contentDescription = null, // decorative
                 modifier = Modifier
-                    .height(200.dp)
+                    .height(250.dp)
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(5.dp)),
                 contentScale = ContentScale.Crop
