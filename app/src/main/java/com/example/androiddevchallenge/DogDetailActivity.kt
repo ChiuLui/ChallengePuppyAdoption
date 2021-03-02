@@ -20,15 +20,15 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
-import androidx.compose.material.Text
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -61,7 +61,6 @@ class DogDetailActivity : AppCompatActivity() {
                     val dog = Dog(name, breed, age, gender, address, photo)
                     ShowDetail(dog)
                 }
-
             }
         }
     }
@@ -95,33 +94,40 @@ fun DogDetail(dog: Dog) {
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text("breed: ${dog.breed}",
-                style = typography.h6)
+            Text(
+                "breed: ${dog.breed}",
+                style = typography.h6
+            )
 
             Spacer(modifier = Modifier.height(5.dp))
 
-            Text("age: ${dog.age}",
-                style = typography.h6)
+            Text(
+                "age: ${dog.age}",
+                style = typography.h6
+            )
 
             Spacer(modifier = Modifier.height(5.dp))
-            Text("gender: ${dog.gender}",
-                style = typography.h6)
+            Text(
+                "gender: ${dog.gender}",
+                style = typography.h6
+            )
 
             Spacer(modifier = Modifier.height(5.dp))
-            Text("address: ${dog.address}",
-                style = typography.h6)
+            Text(
+                "address: ${dog.address}",
+                style = typography.h6
+            )
 
             Spacer(modifier = Modifier.height(15.dp))
 
             Button(
-                onClick = {  },
+                onClick = { },
                 Modifier
                     .fillMaxWidth()
                     .height(50.dp)
-                ) {
+            ) {
                 Text(text = "Contact", fontSize = 18.sp)
             }
-            
         }
     }
 }

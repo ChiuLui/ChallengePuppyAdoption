@@ -22,19 +22,19 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
-import androidx.compose.material.Text
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -142,21 +142,23 @@ fun ShowDogList(context: Context) {
                     Text("Puppy Adoption")
                 }
             )
-            DogList(dogList, onDogClick = {
-                val intent = Intent(context, DogDetailActivity::class.java)
-                val bundle = Bundle()
-                bundle.putString("name", it.name)
-                bundle.putString("breed", it.breed)
-                bundle.putString("age", it.age)
-                bundle.putString("gender", it.gender)
-                bundle.putString("address", it.address)
-                bundle.putInt("photo", it.photo)
+            DogList(
+                dogList,
+                onDogClick = {
+                    val intent = Intent(context, DogDetailActivity::class.java)
+                    val bundle = Bundle()
+                    bundle.putString("name", it.name)
+                    bundle.putString("breed", it.breed)
+                    bundle.putString("age", it.age)
+                    bundle.putString("gender", it.gender)
+                    bundle.putString("address", it.address)
+                    bundle.putInt("photo", it.photo)
 //                bundle.putParcelable("dog", it)
-                intent.putExtras(bundle)
-                startActivity(context, intent, null)
-            })
+                    intent.putExtras(bundle)
+                    startActivity(context, intent, null)
+                }
+            )
         }
-        
     }
 }
 
