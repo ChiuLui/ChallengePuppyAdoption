@@ -88,8 +88,8 @@ fun DogItem(dog: Dog, modifier: Modifier = Modifier) {
             )
             Column(Modifier.padding(8.dp)) {
                 Text(dog.name, style = MaterialTheme.typography.h4)
-                Text("Breed: " + dog.breed, style = MaterialTheme.typography.body2)
-                Text("Address: " + dog.address, style = MaterialTheme.typography.body2)
+                Text("Breed: ${dog.breed}", style = MaterialTheme.typography.body2)
+                Text("Address: ${dog.address}", style = MaterialTheme.typography.body2)
             }
         }
     }
