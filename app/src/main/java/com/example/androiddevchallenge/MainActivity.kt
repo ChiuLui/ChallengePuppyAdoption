@@ -15,6 +15,8 @@
  */
 package com.example.androiddevchallenge
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -23,13 +25,11 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,8 +41,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val context = LocalContext.current
             MyTheme {
-                ShowDogList()
+                ShowDogList(context = context)
             }
         }
     }
@@ -85,7 +86,7 @@ fun DogItem(dog: Dog, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ShowDogList() {
+fun ShowDogList(context: Context) {
 
     val dogList = listOf(
         Dog(
@@ -122,25 +123,41 @@ fun ShowDogList() {
         )
     )
 
-    Surface(color = MaterialTheme.colors.background) {
-        DogList(dogList) {
-//            DogDetail(it)
+    Surface(
+        color = MaterialTheme.colors.background,
+    ) {
+        Column {
+            TopAppBar(
+                title = {
+                    Text("Puppy Adoption")
+                }
+            )
+            DogList(dogList, onDogClick = {
+                val intent = Intent(context, DogDetailActivity::class.java)
+                val bundle = Bundle()
+                bundle.putParcelable("dog", it)
+                intent.putExtras(bundle)
+                startActivity(context, intent, null)
+            })
         }
+        
     }
 }
 
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun ShowDogListLight() {
+    val context = LocalContext.current
     MyTheme {
-        ShowDogList()
+        ShowDogList(context)
     }
 }
 
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun ShowDogListDark() {
+    val context = LocalContext.current
     MyTheme(darkTheme = true) {
-        ShowDogList()
+        ShowDogList(context)
     }
 }

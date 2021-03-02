@@ -6,9 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -17,6 +15,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.data.Dog
 import com.example.androiddevchallenge.ui.theme.MyTheme
 import com.example.androiddevchallenge.ui.theme.typography
@@ -26,11 +25,14 @@ class DogDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyTheme {
-                val dog = Dog(
-                    "Happy", "Corgi", "3",
-                    "Girl", "Alaska", R.drawable.dog_6
-                )
-                ShowDetail(dog)
+
+                val extras = intent.extras
+                val dog = extras?.getParcelable<Dog>("dog")
+
+                if (dog != null) {
+                    ShowDetail(dog)
+                }
+
             }
         }
     }
@@ -47,7 +49,7 @@ fun DogDetail(dog: Dog) {
                 painter = painterResource(dog.photo),
                 contentDescription = null, // decorative
                 modifier = Modifier
-                    .height(180.dp)
+                    .height(200.dp)
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(5.dp)),
                 contentScale = ContentScale.Crop
@@ -56,7 +58,7 @@ fun DogDetail(dog: Dog) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                "Name: ${dog.name}",
+                "name: ${dog.name}",
                 style = typography.h4,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis
@@ -64,21 +66,33 @@ fun DogDetail(dog: Dog) {
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Text("Breed: ${dog.breed}",
+            Text("breed: ${dog.breed}",
                 style = typography.h6)
 
             Spacer(modifier = Modifier.height(5.dp))
 
-            Text("Age: ${dog.age}",
+            Text("age: ${dog.age}",
                 style = typography.h6)
 
             Spacer(modifier = Modifier.height(5.dp))
-            Text("Gender: ${dog.gender}",
+            Text("gender: ${dog.gender}",
                 style = typography.h6)
 
             Spacer(modifier = Modifier.height(5.dp))
-            Text("Address: ${dog.address}",
+            Text("address: ${dog.address}",
                 style = typography.h6)
+
+            Spacer(modifier = Modifier.height(15.dp))
+
+            Button(
+                onClick = { /*TODO*/ },
+                Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
+                ) {
+                Text(text = "Contact", fontSize = 18.sp)
+            }
+            
         }
     }
 }
@@ -86,7 +100,14 @@ fun DogDetail(dog: Dog) {
 @Composable
 fun ShowDetail(dog: Dog) {
     Surface(color = MaterialTheme.colors.background) {
-        DogDetail(dog)
+        Column {
+            TopAppBar(
+                title = {
+                    Text("Puppy Detail")
+                }
+            )
+            DogDetail(dog)
+        }
     }
 }
 
