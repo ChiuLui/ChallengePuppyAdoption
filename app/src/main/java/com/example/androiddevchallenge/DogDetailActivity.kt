@@ -37,12 +37,12 @@ class DogDetailActivity : AppCompatActivity() {
                 val extras = intent.extras
 //                val dog = extras?.getParcelable<Dog>("dog")
                 if (extras != null) {
-                    var name = extras.getString("name", "")
-                    var breed = extras.getString("breed", "")
-                    var age = extras.getString("age", "")
-                    var gender = extras.getString("gender", "")
-                    var address = extras.getString("address", "")
-                    var photo = extras.getInt("photo")
+                    val name = extras.getString("name", "")
+                    val breed = extras.getString("breed", "")
+                    val age = extras.getString("age", "")
+                    val gender = extras.getString("gender", "")
+                    val address = extras.getString("address", "")
+                    val photo = extras.getInt("photo")
                     val dog = Dog(name, breed, age, gender, address, photo)
                     ShowDetail(dog)
                 }
@@ -99,7 +99,7 @@ fun DogDetail(dog: Dog) {
             Spacer(modifier = Modifier.height(15.dp))
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = {  },
                 Modifier
                     .fillMaxWidth()
                     .height(50.dp)
